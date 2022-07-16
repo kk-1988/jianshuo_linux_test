@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@kk-1988
-kk-1988
-/
-jianshuo_linux_test
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-jianshuo_linux_test/drivers/hello.c
-@kk-1988
-kk-1988 write hello drv compeled
-Latest commit 0dacef8 2 minutes ago
- History
- 1 contributor
-Executable File  82 lines (71 sloc)  1.8 KB
-
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/cdev.h>
@@ -90,7 +61,7 @@ int hello_init(void)
     gDev = kzalloc(sizeof(struct cdev), GFP_KERNEL);
     gFile = kzalloc(sizeof(struct file_operations), GFP_KERNEL);
     gFile->open = hello_open;
-    gFile->close = hello_close;
+    gFile->release = hello_close;
     gFile->write = hello_write;
     gFile->read = hello_read;
     cdev_init(gDev, gFile);
@@ -101,7 +72,7 @@ int hello_init(void)
 
 void __exit hello_exit(void)
 {
-    cdev_dev(gDev);
+    cdev_del(gDev);
     unregister_chrdev_region(devNum, subDevNum);
     return;
 }
@@ -109,17 +80,3 @@ void __exit hello_exit(void)
 module_init(hello_init);
 module_exit(hello_exit);
 MODULE_LICENSE("GPL");
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
