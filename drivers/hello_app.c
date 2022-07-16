@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     int r_len, w_len;
     char buf[DATA_NUM] = "hello world";
     memset(buf, 0, DATA_NUM);
-    fd = open("/dev/helloDev", O_RDWR);
+    fd = open("/dev/hello", O_RDWR);
     printf("%d\r\n", fd);
     if(-1 == fd)
     {
