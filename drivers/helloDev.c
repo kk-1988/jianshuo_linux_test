@@ -61,7 +61,7 @@ int hello_init(void)
     gDev = kzalloc(sizeof(struct cdev), GFP_KERNEL);
     gFile = kzalloc(sizeof(struct file_operations), GFP_KERNEL);
     gFile->open = hello_open;
-    gFile->release = hello_close;
+    //gFile->release = hello_close;
     gFile->write = hello_write;
     gFile->read = hello_read;
     cdev_init(gDev, gFile);
